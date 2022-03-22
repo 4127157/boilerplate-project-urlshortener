@@ -43,7 +43,7 @@ app.get('/api/hello', function(req, res) {
 
 app.post('/api/shorturl', (req,res) => {
     console.log("its reaching here");
-    console.dir(req.url_input);
+    console.dir(req.body);
     res.json({
         "lol":req.body.url_input
     });
