@@ -37,7 +37,7 @@ app.get('/api/hello', function(req, res) {
 
 app.post('/api/shorturl', (req,res) => {
     console.log("its reaching here");
-    console.dir(req);
+    console.dir(req.body);
 });
 
 app.listen(port, function() {
