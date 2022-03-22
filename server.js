@@ -41,7 +41,7 @@ app.get('/api/hello', function(req, res) {
   res.json({ greeting: 'hello API' });
 });
 
-app.post('/api/shorturl', (req,res) => {
+app.post('/api/shorturl', async (req,res) => {
     let url = req.body.url;
     
     if(!validUrl.isWebUri(url)){
