@@ -56,7 +56,9 @@ app.post('/api/shorturl', async (req,res) => {
         let counted = URL.countDocuments(function (err, count) {
             if(err)
                 return err;
+            console.log(count);
             return count;
+
         });
         console.log("Number of counted docs");
         console.log(counted);
