@@ -63,7 +63,10 @@ app.post('/api/shorturl', async (req,res) => {
             console.log("Number of counted docs");
             console.log(counted);
             if(findUrl){
-                console.log(findUrl);
+                res.json({
+                    original_url: findUrl.original_url,
+                    short_url: findUrl.short_url
+                });
             } 
             else {
                 findUrl = new URL({
