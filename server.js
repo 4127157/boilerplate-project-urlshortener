@@ -3,6 +3,8 @@ const express = require('express');
 const mongodb = require('mongodb');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+const validUrl = require('valid-url');
 const app = express();
 
 mongoose.connect(process.env.MONGO_URI, {serverSelectionTimeoutMS: 5000, 
@@ -23,6 +25,10 @@ const URL = mongoose.model("URL", urlSchema);
 const port = process.env.PORT || 3000;
 
 app.use(cors());
+
+app.use(bodyParser.urlencoded({
+    extended: false
+});
 
 app.use('/public', express.static(`${process.cwd()}/public`));
 
