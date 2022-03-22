@@ -70,10 +70,10 @@ app.post('/api/shorturl', async (req,res) => {
                     original_url: url,
                     short_url: (counted+1).toString()
                 });
-                await findOne.save();
+                await findUrl.save();
                 res.json({
-                    original_url: findOne.original_url,
-                    short_url: findOne.short_url
+                    original_url: findUrl.original_url,
+                    short_url: findUrl.short_url
                 });
             }
         } catch (err) {
