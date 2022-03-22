@@ -53,7 +53,7 @@ app.post('/api/shorturl', async (req,res) => {
         let findUrl = await URL.findOne({
             original_url: url
         });
-        let counted = URL.countDocuments(function (err, count) {
+        let counted = await URL.countDocuments(function (err, count) {
             if(err)
                 return err;
             console.log(count);
