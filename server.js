@@ -50,25 +50,38 @@ app.post('/api/shorturl', async (req,res) => {
         });
     }
     else {
-        let findUrl = await URL.findOne({
-            original_url: url
-        });
-        let counted = await URL.countDocuments(function (err, count) {
-            if(err)
-                return err;
-            return count;
+        try {
+            let findUrl = await URL.findOne({
+                original_url: url
+            });
+            let counted = await URL.countDocuments((err, count)=> {
+                if(err)
+                    return err;
+                return count;
 
-        });
-        console.log("Number of counted docs");
-        console.log(counted);
-        if(findUrl){
-            console.log(findUrl);
-        } 
-        // else {
-        //     findOne = new URL({
-        //         original_url: url,
-
-
+            });
+            console.log("Number of counted docs");
+            console.log(counted);
+            if(findUrl){
+                console.log(findUrl);
+            } 
+            else {
+                findUrl = new URL({
+                    original_url: url,
+                    short_url: (counted+1).toString()
+                });
+                await findOne.save();
+                res.json({
+                    original_url: findOne.original_url,
+                    short_url: findOne.short_url
+                });
+            }
+        } catch (err) {
+            console.error(err);
+            res.json({
+                "error": "There was a server error while processing your request."
+            });
+        }
     }
 
 });
