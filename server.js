@@ -83,7 +83,22 @@ app.post('/api/shorturl', async (req,res) => {
             });
         }
     }
+});
 
+app.get('/api/shorturl/:linker?', async (req, res) => {
+    try {
+        let link = await URL.findOne({
+            short_url: req.params.linker
+        });
+        if (link){
+            return res.redirect(link.original_url);
+        } else {
+            return res.status(404).json("Enter a valid shortcut");
+        }
+    } catch (err) { 
+        console.error(err);
+        res.status(500).json("The server encountered a problem, try again later");
+    }
 });
 
 app.listen(port, function() {
