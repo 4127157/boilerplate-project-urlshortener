@@ -42,10 +42,18 @@ app.get('/api/hello', function(req, res) {
 });
 
 app.post('/api/shorturl', (req,res) => {
+    let url = req.body.url;
+    
+    if(!validUrl.isWebUri(url)){
+        res.json({
+            "error": "Invalid URL"
+        });
+    }
+
     console.log("its reaching here");
     console.dir(req.body.url);
     res.json({
-        "lol":req.body.url_input
+        "lol":req.body.url
     });
 });
 
