@@ -5,7 +5,9 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 
-mongoose.connect(process.env.MONGO_URI, {serverSelectionTimeoutMS: 5000, retryWrites: true})
+mongoose.connect(process.env.MONGO_URI, {serverSelectionTimeoutMS: 5000, 
+                                         retryWrites: true, 
+                                         useNewUrlParser:true})
     .catch(err => console.log(err));
 
 const Schema = mongoose.Schema;
@@ -32,7 +34,7 @@ app.get('/api/hello', function(req, res) {
   res.json({ greeting: 'hello API' });
 });
 
-app.post('/api/shortcut', (req,res) => {
+app.post('/api/shorturl', (req,res) => {
     console.log("its reaching here");
 });
 
