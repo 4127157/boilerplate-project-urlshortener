@@ -6,7 +6,8 @@ const cors = require('cors');
 const app = express();
 
 mongoose.connect(process.env.MONGO_URI, {serverSelectionTimeoutMS: 5000, 
-                                         retryWrites: true, 
+                                         retryWrites: true,
+                                         useUnifiedTopology: true,
                                          useNewUrlParser:true})
     .catch(err => console.log(err));
 
@@ -36,6 +37,7 @@ app.get('/api/hello', function(req, res) {
 
 app.post('/api/shorturl', (req,res) => {
     console.log("its reaching here");
+    console.dir(req);
 });
 
 app.listen(port, function() {
