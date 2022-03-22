@@ -49,12 +49,27 @@ app.post('/api/shorturl', (req,res) => {
             "error": "Invalid URL"
         });
     }
+    else {
+        let findUrl = await URL.findOne({
+            original_url: url
+        });
+        let counted = URL.countDocuments({original_url: String}, function (err, count) {
+            if(err)
+                return err;
+            return count;
+        });
+        console.log("Number of counted docs");
+        console.log(counted);
+        if(findUrl){
+            console.log(findUrl);
+        } 
+        // else {
+        //     findOne = new URL({
+        //         original_url: url,
 
-    console.log("its reaching here");
-    console.dir(req.body.url);
-    res.json({
-        "lol":req.body.url
-    });
+
+    }
+
 });
 
 app.listen(port, function() {
